@@ -31,6 +31,8 @@ public class OnAudioController {
             OnWithFiltersQuery(call: call, result: result).queryWithFilters()
         case "queryArtwork":
             OnArtworkQuery(call: call, result: result).queryArtwork()
+        case "queryPodcasts":
+            onPodcastsQuery(call: call, result: result).queryPodcasts()
         // The playlist for [IOS] is completely limited, the developer can only:
         //   * Create playlist
         //   * Add item to playlist (Unsuported, for now)

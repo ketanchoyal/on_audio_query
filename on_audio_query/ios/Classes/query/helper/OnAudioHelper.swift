@@ -65,6 +65,43 @@ public func formatSongList(args: [String: Any], allSongs: [[String: Any?]]) -> [
     return tempList
 }
 
+public func formatPodcastList(args: [String: Any], allPodcasts: [[String: Any?]]) -> [[String: Any?]] {
+    var tempList = allSongs
+    let order = args["orderType"] as? Int
+    let sortType = args["sortType"] as? Int
+    let ignoreCase = args["ignoreCase"] as! Bool
+    
+    //
+    switch sortType {
+    case 3:
+        tempList.sort { (val1, val2) -> Bool in
+            (val1["duration"] as! Double) > (val2["duration"] as! Double)
+        }
+    case 4:
+        tempList.sort { (val1, val2) -> Bool in
+            (val1["date_added"] as! Int) > (val2["date_added"] as! Int)
+        }
+    case 5:
+        tempList.sort { (val1, val2) -> Bool in
+            (val1["_size"] as! Int) > (val2["_size"] as! Int)
+        }
+    case 6:
+        tempList.sort { (val1, val2) -> Bool in
+            ((val1["_display_name"] as! String).isCase(ignoreCase: ignoreCase)) > ((val2["_display_name"] as! String).isCase(ignoreCase: ignoreCase))
+        }
+    default:
+        break
+    }
+    
+    //
+    if order == 1 {
+        tempList.reverse()
+    }
+    return tempList
+}
+
+
+
 //Albums
 
 func loadAlbumItem(album: MPMediaItemCollection) -> [String: Any?] {
