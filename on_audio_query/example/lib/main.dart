@@ -60,12 +60,7 @@ class _SongsState extends State<Songs> {
       ),
       body: FutureBuilder<List<SongModel>>(
         // Default values:
-        future: _audioQuery.querySongs(
-          sortType: null,
-          orderType: OrderType.ASC_OR_SMALLER,
-          uriType: UriType.EXTERNAL,
-          ignoreCase: true,
-        ),
+        future: _audioQuery.queryPodcasts(),
         builder: (context, item) {
           // Loading content
           if (item.data == null) return const CircularProgressIndicator();

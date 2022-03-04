@@ -66,7 +66,7 @@ public func formatSongList(args: [String: Any], allSongs: [[String: Any?]]) -> [
 }
 
 public func formatPodcastList(args: [String: Any], allPodcasts: [[String: Any?]]) -> [[String: Any?]] {
-    var tempList = allSongs
+    var tempList = allPodcasts
     let order = args["orderType"] as? Int
     let sortType = args["sortType"] as? Int
     let ignoreCase = args["ignoreCase"] as! Bool
@@ -112,6 +112,19 @@ func loadAlbumItem(album: MPMediaItemCollection) -> [String: Any?] {
         "album": album.items[0].albumTitle,
         "artist_id": album.items[0].artistPersistentID,
         "album_id": album.items[0].albumPersistentID
+    ]
+    return albumData
+}
+//Podcast
+
+func loadPodcastItem(podcast: MPMediaItem) -> [String: Any?] {
+    let albumData: [String: Any?] = [
+        "numsongs": 0,
+        "artist": podcast.albumArtist,
+        "_id": podcast.persistentID,
+        "album": podcast.albumTitle,
+        "artist_id": podcast.artistPersistentID,
+        "album_id": podcast.albumPersistentID
     ]
     return albumData
 }
